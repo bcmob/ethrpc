@@ -103,7 +103,6 @@ func (rpc *EthRPC) Call(method string, params ...interface{}) (json.RawMessage, 
 	}
 
 	return resp.Result, nil
-
 }
 
 // RawCall returns raw response of method call (Deprecated)
@@ -326,6 +325,14 @@ func (rpc *EthRPC) EthSendTransaction(transaction T) (string, error) {
 
 	err := rpc.call("eth_sendTransaction", &hash, transaction)
 	return hash, err
+}
+
+// UnlockAccount call personal_unlockAccount.
+func (rpc *EthRPC) UnlockAccount(addr, pass string) (bool, error) {
+	var response bool
+
+	err := rpc.call("personal_unlockAccount", &response, addr, pass, nil)
+	return response, err
 }
 
 // EthSendRawTransaction creates new message call transaction or a contract creation for signed transactions.
