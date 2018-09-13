@@ -223,7 +223,13 @@ type proxyTransactionReceipt struct {
 type hexInt int
 
 func (i *hexInt) UnmarshalJSON(data []byte) error {
-	result, err := ParseInt(string(bytes.Trim(data, `"`)))
+	str := string(bytes.Trim(data, `"`))
+
+	if str == "null" {
+		str = "0"
+	}
+
+	result, err := ParseInt(str)
 	*i = hexInt(result)
 
 	return err
