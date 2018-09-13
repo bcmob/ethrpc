@@ -54,6 +54,7 @@ Golang client for ethereum [JSON RPC API](https://github.com/ethereum/wiki/wiki/
 - [ ] eth_getWork
 - [ ] eth_submitWork
 - [ ] eth_submitHashrate
+- [x] personal_unlockAccount
 - [ ] shh_post
 - [ ] shh_version
 - [ ] shh_newIdentity
