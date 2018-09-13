@@ -375,6 +375,7 @@ func (rpc *EthRPC) getBlock(method string, withTransactions bool, params ...inte
 	if err != nil {
 		return nil, err
 	}
+
 	block := response.toBlock()
 
 	return &block, nil
@@ -388,6 +389,11 @@ func (rpc *EthRPC) EthGetBlockByHash(hash string, withTransactions bool) (*Block
 // EthGetBlockByNumber returns information about a block by block number.
 func (rpc *EthRPC) EthGetBlockByNumber(number int, withTransactions bool) (*Block, error) {
 	return rpc.getBlock("eth_getBlockByNumber", withTransactions, IntToHex(number), withTransactions)
+}
+
+// EthGetUncleByBlockNumberAndIndex returns information about a uncle by block number.
+func (rpc *EthRPC) EthGetUncleByBlockNumberAndIndex(number int, index int) (*Block, error) {
+	return rpc.getBlock("eth_getUncleByBlockNumberAndIndex", false, IntToHex(number), IntToHex(index))
 }
 
 func (rpc *EthRPC) getTransaction(method string, params ...interface{}) (*Transaction, error) {
